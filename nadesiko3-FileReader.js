@@ -1,5 +1,5 @@
 /*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-　nadesiko3-FileReader.js　v1.0.0
+　nadesiko3-FileReader.js　v1.0.1
 
 　File APIで、ローカルのファイルを読み込むためのプラグイン。
 
@@ -15,6 +15,18 @@ const PluginFileReader = {
       const inp = sys.__exec('DOM部品作成', ['input', sys])
       inp.type = 'file'
       return inp
+    }
+  },
+  'ファイル選択時': { // @inputでファイルを選択した時 // @ふぁいるせんたくしたとき
+    type: 'func',
+    josi: [['と'],['の', 'で']],
+    fn: function (fn, inp, sys) {
+      if (typeof (inp) === 'string') {inp = document.querySelector(inp)}
+      inp.addEventListener('change', function(e){
+        sys.__v0['対象'] = inp.files
+        sys.__v0['対象イベント'] = e
+        return fn(e, sys);
+      });
     }
   },
   // @ドラッグ&ドロップ
@@ -35,8 +47,7 @@ const PluginFileReader = {
         e.stopPropagation();
         e.preventDefault();
         const dt = e.dataTransfer;
-        const files = dt.files;
-        sys.__v0['対象'] = files
+        sys.__v0['対象'] = dt.files
         sys.__v0['対象イベント'] = e
         return fn(e, sys);
       });
