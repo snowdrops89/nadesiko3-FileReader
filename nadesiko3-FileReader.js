@@ -1,5 +1,5 @@
 /*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-　nadesiko3-FileReader.js　v1.0.2
+　nadesiko3-FileReader.js　v1.0.3
 
 　File APIで、ローカルのファイルを読み込むためのプラグイン。
 
@@ -68,11 +68,12 @@ const PluginFileReader = {
     }
   },
   // @ファイル開く
+  'テキストファイル追加拡張子': { type: 'const', value: 'csv|tsv|json|js|nako|nako3' }, // @てきすとふぁいるついかかくちょうし
   'テキストファイル開時': { // @ローカルのテキストファイルを開く // @てきすとふぁいるひらいたとき
     type: 'func',
     josi: [['と'],['で'],['の', 'を']],
     fn: function (fn, cha, file, sys) {
-      if (!file.type.match('text.*')&& !file.name.match('.+\.(csv|tsv|json|js|nako|nako3)')) {
+      if (!file.type.match('text.*')&& !file.name.match('.+\.('+ sys.__v0['テキストファイル追加拡張子'] +')')) {
         console.error("テキストファイル開時：『"+file.name+"』は、テキストファイルではありません。");
         return;
       }
@@ -145,5 +146,3 @@ if (typeof (navigator) === 'object') {
 } else {
   module.exports = PluginFileReader
 }
-
-
