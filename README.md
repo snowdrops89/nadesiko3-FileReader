@@ -12,3 +12,9 @@
 ```
 !「https://n3s.nadesi.com/plain/nadesiko3-FileReader.js」を取込む。
 ```
+
+## サンプル
+
+　ローカルにある画像、テキスト、オーディオファイルをファイル選択ダイアログを出してorドラッグ＆ドロップで読み込むテストです。
+
+> https://n3s.nadesi.com/id.php?735
