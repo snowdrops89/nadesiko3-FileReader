@@ -95,7 +95,7 @@ const PluginFileReader = {
     fn: function (fn, cha, file, sys) {
       if (!file.type.match('text.*')&& !file.name.match('.+\.('+ sys.__v0['テキストファイル追加拡張子'] +')')) {
         console.error("テキストファイル開時：『"+file.name+"』は、テキストファイルではありません。");
-        return;
+        return false;
       }
       const reader = new FileReader();
       reader.readAsText(file, cha);
@@ -112,7 +112,7 @@ const PluginFileReader = {
     fn: function (fn, file, sys) {
       if (!file.type.match('image.*')) {
         console.error("画像ファイル開時：『"+file.name+"』は、画像ファイルではありません。");
-        return;
+        return false;
       }
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -132,7 +132,7 @@ const PluginFileReader = {
     fn: function (fn, file, sys) {
       if (!file.type.match('audio.*')) {
         console.error("オーディオファイル開時：『"+file.name+"』は、オーディオファイルではありません。");
-        return;
+        return false;
       }
       const reader = new FileReader();
       reader.readAsDataURL(file);
