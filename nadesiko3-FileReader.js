@@ -1,7 +1,8 @@
 /*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-　nadesiko3-FileReader.js　v1.1.1
+　nadesiko3-FileReader.js　v1.2.0
 
 　File APIで、ローカルのファイルを読み込むためのプラグイン。
+　ダウンロードもできるようにしました。
 
 　作者:雪乃☆雫　／　ライセンス:CC0　／　制作時のナデシコバージョン:3.4.22
 *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*/
@@ -156,6 +157,48 @@ const PluginFileReader = {
         sys.__v0['対象'] = data
         return fn(data, sys);
       }
+    }
+  },
+  // @ダウンロード
+  'テキストダウンロード': { // @文字列(text)をファイル名(name)でダウンロードする // @てきすとだうんろーど
+    type: 'func',
+    josi: [['を'],['で','へ','に']],
+    pure: true,
+    fn: function (text, name, sys) {
+      const blob = sys.__exec('BLOB作成', [text, {"type":"text/plain"}, sys]);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.download = name;
+      a.href = url;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      return true
+    }
+  },
+  'JPGダウンロード': { // @描画中キャンバスをファイル名(name)で品質(0～1)のJPG形式にてダウンロードする。 // @JPGだうんろーど
+    type: 'func',
+    josi: [['で','へ','に'],['の']],
+    pure: true,
+    fn: function (name, q, sys) {
+      const cv = sys.__v0['描画中キャンバス'];
+      const a = document.createElement('a');
+      a.download = name;
+      a.href = cv.toDataURL('image/jpeg',q);
+      a.click();
+      return true
+    }
+  },
+  'PNGダウンロード': { // @描画中キャンバスをファイル名(name)でPNG形式にてダウンロードする。 // @PNGだうんろーど
+    type: 'func',
+    josi: [['で','へ','に']],
+    pure: true,
+    fn: function (name, sys) {
+      const cv = sys.__v0['描画中キャンバス'];
+      const a = document.createElement('a');
+      a.download = name;
+      a.href = cv.toDataURL();
+      a.click();
+      return true
     }
   },
   '!クリア': {
