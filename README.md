@@ -13,6 +13,11 @@
 !「https://n3s.nadesi.com/plain/nadesiko3-FileReader.js」を取込む。
 ```
 
+## 命令一覧
+　Qiitaにリファレンスめいたものを書きました。
+
+> [なでしこさんでローカルのファイルを読み込みたい！](https://qiita.com/snowdrops89/items/7e9db5d926a1b69783b3)
+
 ## サンプル
 
 　ローカルにある画像、テキスト、オーディオファイルをファイル選択ダイアログを出してorドラッグ＆ドロップで読み込むテストです。
