@@ -1,5 +1,5 @@
 /*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-　nadesiko3-FileReader.js
+　nadesiko3-FileReader.js　v2.0.0
 
 　File APIで、ローカルのファイルを読み込むためのプラグイン。
 　なでしこv3.6以降への対応。
@@ -12,9 +12,9 @@ const PluginFileReader = {
     value: { // プラグインに関する情報を指定する
       pluginName: 'nadesiko3-FileReader', // プラグインの名前
       description: 'File APIで、ローカルのファイルを読み込むためのプラグイン', // プラグインの説明
-      pluginVersion: '3.6.15', // プラグインのバージョン
+      pluginVersion: '2.0.0', // プラグインのバージョン
       nakoRuntime: ['wnako'], // 対象ランタイム
-      nakoVersion: '3.6.15' // 要求なでしこバージョン
+      nakoVersion: '3.6.2' // 要求なでしこバージョン
     }
   },
   '初期化': {
