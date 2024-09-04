@@ -1,12 +1,22 @@
 /*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-　nadesiko3-FileReader.js　v1.2.0
+　nadesiko3-FileReader.js
 
 　File APIで、ローカルのファイルを読み込むためのプラグイン。
-　ダウンロードもできるようにしました。
+　なでしこv3.6以降への対応。
 
-　作者:雪乃☆雫　／　ライセンス:CC0　／　制作時のナデシコバージョン:3.4.22
+　作者:雪乃☆雫　／　ライセンス:CC0　／　制作時のナデシコバージョン:3.6.16
 *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*/
 const PluginFileReader = {
+  'meta': {
+    type: 'const',
+    value: { // プラグインに関する情報を指定する
+      pluginName: 'nadesiko3-FileReader', // プラグインの名前
+      description: 'File APIで、ローカルのファイルを読み込むためのプラグイン', // プラグインの説明
+      pluginVersion: '3.6.15', // プラグインのバージョン
+      nakoRuntime: ['wnako'], // 対象ランタイム
+      nakoVersion: '3.6.15' // 要求なでしこバージョン
+    }
+  },
   '初期化': {
     type: 'func',
     josi: [],
@@ -35,8 +45,8 @@ const PluginFileReader = {
       if (typeof (inp) === 'string') {inp = document.querySelector(inp)}
       sys.__inp_list.push({inp,fn})
       sys.__file_change = function(e){
-        sys.__v0['対象'] = inp.files
-        sys.__v0['対象イベント'] = e
+        sys.__setSysVar("対象", inp.files)
+        sys.__setSysVar("対象イベント", e)
         return fn(e, sys);
       };
 
@@ -62,8 +72,8 @@ const PluginFileReader = {
         e.stopPropagation();
         e.preventDefault();
         const dt = e.dataTransfer;
-        sys.__v0['対象'] = dt.files
-        sys.__v0['対象イベント'] = e
+        sys.__setSysVar("対象", dt.files)
+        sys.__setSysVar("対象イベント", e)
         return fn(e, sys);
       };
       dom.addEventListener('dragenter', sys.__dom_dragenter);
@@ -102,7 +112,7 @@ const PluginFileReader = {
       reader.readAsText(file, cha);
       reader.onload = function() {
         txt = reader.result
-        sys.__v0['対象'] = txt
+        sys.__setSysVar("対象", txt)
         return fn(txt, sys);
       }
     }
@@ -120,7 +130,7 @@ const PluginFileReader = {
       reader.onload = function() {
         const img = new window.Image()
         img.src = reader.result
-        sys.__v0['対象'] = img
+        sys.__setSysVar("対象", img)
         img.onload = function() {
           return fn(img, sys);
         }
@@ -141,7 +151,7 @@ const PluginFileReader = {
         const audio = new Audio()
         audio.pause()
         audio.src = reader.result;
-        sys.__v0['対象'] = audio
+        sys.__setSysVar("対象", audio)
         return fn(audio, sys);
       }
     }
@@ -154,7 +164,7 @@ const PluginFileReader = {
       reader.readAsDataURL(file);
       reader.onload = function() {
         const data = reader.result;
-        sys.__v0['対象'] = data
+        sys.__setSysVar("対象", data)
         return fn(data, sys);
       }
     }
@@ -180,7 +190,7 @@ const PluginFileReader = {
     josi: [['で','へ','に'],['の']],
     pure: true,
     fn: function (name, q, sys) {
-      const cv = sys.__v0['描画中キャンバス'];
+      const cv = sys.__getSysVar("描画中キャンバス");
       const a = document.createElement('a');
       a.download = name;
       a.href = cv.toDataURL('image/jpeg',q);
@@ -193,7 +203,7 @@ const PluginFileReader = {
     josi: [['で','へ','に']],
     pure: true,
     fn: function (name, sys) {
-      const cv = sys.__v0['描画中キャンバス'];
+      const cv = sys.__getSysVar("描画中キャンバス");
       const a = document.createElement('a');
       a.download = name;
       a.href = cv.toDataURL();
