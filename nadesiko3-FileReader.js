@@ -1,10 +1,10 @@
 /*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-　nadesiko3-FileReader.js　v2.0.0
+　nadesiko3-FileReader.js　v2.0.1
 
 　File APIで、ローカルのファイルを読み込むためのプラグイン。
 　なでしこv3.6以降への対応。
 
-　作者:雪乃☆雫　／　ライセンス:CC0　／　制作時のナデシコバージョン:3.6.16
+　作者:雪乃☆雫　／　ライセンス:CC0　／　制作時のナデシコバージョン:3.6.23
 *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*/
 const PluginFileReader = {
   'meta': {
@@ -104,7 +104,7 @@ const PluginFileReader = {
     type: 'func',
     josi: [['と'],['で'],['の', 'を']],
     fn: function (fn, cha, file, sys) {
-      if (!file.type.match('text.*')&& !file.name.match('.+\.('+ sys.__v0['テキストファイル追加拡張子'] +')')) {
+      if (!file.type.match('text.*')&& !file.name.match('.+\.('+ sys.__getSysVar['テキストファイル追加拡張子'] +')')) {
         console.error("テキストファイル開時：『"+file.name+"』は、テキストファイルではありません。");
         return false;
       }
