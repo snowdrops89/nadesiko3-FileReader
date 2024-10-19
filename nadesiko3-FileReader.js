@@ -12,7 +12,7 @@ const PluginFileReader = {
     value: { // プラグインに関する情報を指定する
       pluginName: 'nadesiko3-FileReader', // プラグインの名前
       description: 'File APIで、ローカルのファイルを読み込むためのプラグイン', // プラグインの説明
-      pluginVersion: '2.0.0', // プラグインのバージョン
+      pluginVersion: '2.0.1', // プラグインのバージョン
       nakoRuntime: ['wnako'], // 対象ランタイム
       nakoVersion: '3.6.2' // 要求なでしこバージョン
     }
